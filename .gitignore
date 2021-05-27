@@ -1,0 +1,10 @@
+snippets/
+transient/
+var/
+.lsp-session-v1
+.org-id-locations
+bookmarks
+history
+projectile-bookmarks.eld
+recentf
+*~
