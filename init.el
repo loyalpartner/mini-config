@@ -237,7 +237,7 @@
 
 (use-package plantuml-mode
   :ensure t
-  :mode ("\\.uml\\'")
+  :mode ("\\.uml\\'" "\\.puml\\'")
   :config
   (setq plantuml-jar-path "~/plantuml.jar"
 	      plantuml-default-exec-mode 'jar
