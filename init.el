@@ -16,6 +16,8 @@
       mac-command-modifier 'meta
       x-hyper-keysym 'super)
 
+(setq-default tab-width 2)
+
 (use-package recentf
   :hook (after-init . recentf-mode))
 
@@ -189,12 +191,17 @@
 	org-indent-indentation-per-level 1
 	)
   
+  
+  
   (defun org-summary-todo (n-done n-not-done)
     "Switch entry to DONE when all subentries are done, to TODO otherwise."
-    (let (org-log-done org-log-states) ; turn off logging
+    (let (org-log-done org-log-states)	; turn off logging
       (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
-  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo))
+  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+  :config
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+  )
 
 (use-package org-capture
   :commands (org-capture)
@@ -227,3 +234,26 @@
 (use-package valign
   :ensure t
   :hook (org-mode . valign-mode))
+
+(use-package plantuml-mode
+  :ensure t
+  :mode ("\\.uml\\'")
+  :config
+  (setq plantuml-jar-path "~/plantuml.jar"
+	      plantuml-default-exec-mode 'jar
+        tab-stop 2)
+  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+  (setq org-plantuml-jar-path (expand-file-name "~/plantuml.jar"))
+  
+  )
+
+(use-package rime
+	:ensure t
+	:custom
+	(default-input-method "rime"))
+
+
+(use-package sis
+	:ensure t
+	:config
+	(sis-ism-lazyman-config nil "rime" 'native))
